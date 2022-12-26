@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iFrame Messaging example</title>
+</head>
+<body>
+  <div id="app">
+    <iframe id="static" src="http://localhost:8080" style="height: 90vh"></iframe>
+    <iframe id="vite" src="http://localhost:5173" style="height: 90vh"></iframe>
+    <iframe id="webpack" src="http://localhost:8081" style="height: 90vh"></iframe>
+    <button @click="sendMessage">Send message</button>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      methods: {
+        sendMessage() {
+          document.querySelector('#static').contentWindow.postMessage({
+            type: 'test',
+            message: 'hello world!'
+          }, '*')
+          document.querySelector('#vite').contentWindow.postMessage({
+            type: 'test',
+            message: 'hello world!'
+          }, '*')
+          document.querySelector('#webpack').contentWindow.postMessage({
+            type: 'test',
+            message: 'hello world!'
+          }, '*')
+        }
+      }
+    })
+  </script>
+</body>
+</html>
